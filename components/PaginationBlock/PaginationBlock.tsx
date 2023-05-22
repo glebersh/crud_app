@@ -80,4 +80,6 @@ const PaginationBlock = React.memo(({ totalUsers }: { totalUsers: number }) => {
   )
 });
 
+PaginationBlock.displayName = 'PaginationBlock';
+
 export default PaginationBlock;

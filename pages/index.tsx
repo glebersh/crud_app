@@ -70,7 +70,7 @@ export default function Home() {
                   {
                     !isRegistration ?
                       <>
-                        <Text>Don't have an account yet?</Text>
+                        <Text>Don&apos;t have an account yet?</Text>
                         <Button variant='link' onClick={() => setFormType(true)}>Sign up now</Button>
                       </>
                       :

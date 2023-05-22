@@ -23,7 +23,7 @@ const LoginForm = () => {
 
         <Box>
           <Text mt='.33em'>Sign In with email, Google or Github account.
-            If you don't want to create a new account, you can use existing mock data:</Text>
+            If you don&apos;t want to create a new account, you can use existing mock data:</Text>
           <Flex direction='column' mt='.33em' align='flex-start'>
             <strong>Email - admin@example.com</strong>
             <strong>Password: admin</strong>
