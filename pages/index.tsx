@@ -57,35 +57,35 @@ export default function Home() {
             }
           </Button>
           <AnimatePresence>
-            <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }}>
-              <Box backgroundColor={bgColor} w='50%' p='2em' m='0 auto' borderRadius='.5em' zIndex={999}>
+            {/* <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }}> */}
+            <Box backgroundColor={bgColor} w='50%' p='2em' m='0 auto' borderRadius='.5em' zIndex={999}>
+              {
+                isRegistration ?
+                  <RegistrationForm successHandler={() => setFormType(false)} />
+                  :
+                  <LoginForm />
+              }
+              <ProvidersBlock isRegistration={isRegistration} />
+              <Flex alignItems='center' w='100%' gap='.5em' justifyContent='center'>
                 {
-                  isRegistration ?
-                    <RegistrationForm successHandler={() => setFormType(false)} />
+                  !isRegistration ?
+                    <>
+                      <Text>Don&apos;t have an account yet?</Text>
+                      <Button variant='link' onClick={() => setFormType(true)}>Sign up now</Button>
+                    </>
                     :
-                    <LoginForm />
+                    <>
+                      <Text>Already have an account?</Text>
+                      <Button variant='link' onClick={() => setFormType(false)}>Sign in now</Button>
+                    </>
                 }
-                <ProvidersBlock isRegistration={isRegistration} />
-                <Flex alignItems='center' w='100%' gap='.5em' justifyContent='center'>
-                  {
-                    !isRegistration ?
-                      <>
-                        <Text>Don&apos;t have an account yet?</Text>
-                        <Button variant='link' onClick={() => setFormType(true)}>Sign up now</Button>
-                      </>
-                      :
-                      <>
-                        <Text>Already have an account?</Text>
-                        <Button variant='link' onClick={() => setFormType(false)}>Sign in now</Button>
-                      </>
-                  }
-                </Flex>
-              </Box>
-            </motion.div>
+              </Flex>
+            </Box>
+            {/* </motion.div> */}
           </AnimatePresence>
-          {/* <div className={isLight ? styles.wave : styles.wave_dark}></div>
           <div className={isLight ? styles.wave : styles.wave_dark}></div>
-          <div className={isLight ? styles.wave : styles.wave_dark}></div> */}
+          <div className={isLight ? styles.wave : styles.wave_dark}></div>
+          <div className={isLight ? styles.wave : styles.wave_dark}></div>
         </div>
       </PageAnimationWrapper >
     </>

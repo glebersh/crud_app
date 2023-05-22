@@ -3,7 +3,6 @@ import { signIn } from 'next-auth/react';
 
 
 export const useSignIn = () => {
-
   return useFormik({
     initialValues: {
       email: '',
@@ -13,7 +12,7 @@ export const useSignIn = () => {
       redirect: false,
       email: values.email,
       password: values.password,
-      callbackUrl: '/users',
+      callbackUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/users`,
     })
   });
 };

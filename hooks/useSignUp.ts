@@ -19,7 +19,7 @@ export const useSignUp = (successHandler: () => void) => {
         image: null
       };
 
-      const resp = await fetch('http://localhost:3000/api/auth/signup', {
+      const resp = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
