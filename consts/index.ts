@@ -1,0 +1,2 @@
+export const limitSelectOptions = [{ title: '4', value: 4 }, { title: '6', value: 6 }, { title: '8', value: 8 }];
+export const tableHeaders = ['', 'Name', 'Email', 'Birth Date', 'Salary', 'Sex', 'Status'];

@@ -9,14 +9,30 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.19",
+    "@chakra-ui/react": "^2.6.1",
+    "@emotion/react": "^11.10.8",
+    "@emotion/styled": "^11.10.8",
+    "@reduxjs/toolkit": "^1.9.5",
+    "@tanstack/react-query": "^4.29.5",
+    "@tanstack/react-query-devtools": "^4.29.6",
+    "@types/bcryptjs": "^2.4.2",
     "@types/node": "20.0.0",
     "@types/react": "18.2.5",
     "@types/react-dom": "18.2.3",
+    "bcryptjs": "^2.4.3",
     "eslint": "8.39.0",
     "eslint-config-next": "13.4.1",
+    "formik": "^2.2.9",
+    "framer-motion": "^10.12.8",
+    "ky": "^0.33.3",
+    "ky-universal": "^0.11.0",
+    "mongoose": "^7.1.0",
     "next": "13.4.1",
+    "next-auth": "^4.22.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-redux": "^8.0.5",
     "typescript": "5.0.4"
   }
 }
