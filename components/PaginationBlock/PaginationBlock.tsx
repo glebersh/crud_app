@@ -1,8 +1,8 @@
 import { RootState } from "@/store";
 import { useAppDispatch } from "@/store/hooks/useAppDispatch";
-import { setColumnSort, setPage } from "@/store/slices/clientSlice";
-import { Flex, Button, useColorModeValue } from "@chakra-ui/react";
-import React, { useLayoutEffect, useEffect, useState } from "react";
+import { setPage } from "@/store/slices/clientSlice";
+import { Flex, Button } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const PaginationBlock = React.memo(({ totalUsers }: { totalUsers: number }) => {
@@ -64,8 +64,7 @@ const PaginationBlock = React.memo(({ totalUsers }: { totalUsers: number }) => {
             isDisabled={_pageNum === val}
             textDecoration={_pageNum === val ? 'underline' : ''}
             borderColor={_pageNum === val ? 'accentOne' : 'transparent'}
-            w='40px'
-          >
+            w='40px'>
             {val}
           </Button>)
       }
