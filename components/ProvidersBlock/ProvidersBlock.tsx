@@ -7,11 +7,11 @@ const ProvidersBlock = ({ isRegistration }: { isRegistration: boolean }) => {
     <>
       <Flex alignItems={'center'} direction='column' w='30%' m='2em auto' gap='2em'>
         <Button {...ButtonDefaultStyles} gap='1em'
-          onClick={() => signIn('google', { callbackUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/users` })} >
+          onClick={async () => await signIn('google', { callbackUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/users` })} >
           Sign {isRegistration ? 'Up' : 'In'} with Google Account <i className="bi bi-google"></i>
         </Button>
         <Button {...ButtonDefaultStyles} gap='1em'
-          onClick={() => signIn('github', { callbackUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/users` })}>
+          onClick={async () => await signIn('github', { callbackUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/users` })}>
           Sign {isRegistration ? 'Up' : 'In'} with Github Account <i className="bi bi-github"></i>
         </Button>
       </Flex>

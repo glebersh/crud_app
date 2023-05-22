@@ -6,7 +6,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const PaginationBlock = React.memo(({ totalUsers }: { totalUsers: number }) => {
-
   const _limit = useSelector((state: RootState) => state.clientReducer.paginationData.limit);
   const _pageNum = useSelector((state: RootState) => state.clientReducer.paginationData.pageNumber);
 
