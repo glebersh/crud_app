@@ -42,6 +42,11 @@ const clientReducer = createSlice({
     filters: {
       searchFilterValue: '',
       columnSort: 'none',
+      mapFilters: {
+        salary: 0,
+        status: '',
+        sex: '',
+      }
     }
   },
   reducers: {
@@ -85,6 +90,15 @@ const clientReducer = createSlice({
     setColumnSort: (state, action: { payload: string }) => {
       state.filters.columnSort = action.payload;
     },
+    addMapFilter: (state, action: {
+      payload: {
+        salary: number,
+        status: string,
+        sex: string
+      }
+    }) => {
+      state.filters.mapFilters = action.payload;
+    }
   }
 });
 
@@ -101,4 +115,5 @@ export const {
   setPage,
   setLimit,
   setSearchValue,
-  setColumnSort } = clientReducer.actions;
+  setColumnSort,
+  addMapFilter } = clientReducer.actions;

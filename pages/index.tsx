@@ -1,7 +1,7 @@
 import { PageAnimationWrapper } from '@/components';
-import LoginForm from '@/components/LoginForm';
-import ProvidersBlock from '@/components/ProvidersBlock';
-import RegistrationForm from '@/components/RegistrationForm';
+import LoginForm from '@/components/_loginForm/LoginForm';
+import ProvidersBlock from '@/components/_loginForm/ProvidersBlock';
+import RegistrationForm from '@/components/_loginForm/RegistrationForm';
 import { Box, Button, Flex, Text, useColorMode, useColorModeValue } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 import Head from 'next/head';
@@ -11,13 +11,14 @@ import styles from '../styles/bgAnimation.module.css';
 import { LinkStyleButtonStyles } from '@/styles/additionalStyles';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useBackgroundColor } from '@/hooks/useBackgroundColor';
 
 
 export default function Home() {
   const session = useSession();
   const router = useRouter();
   const [isRegistration, setFormType] = useState(false);
-  const bgColor = useColorModeValue('white', '#1a1a1a');
+  const bgColor = useBackgroundColor();
 
 
   const formOpacityAnimation = {

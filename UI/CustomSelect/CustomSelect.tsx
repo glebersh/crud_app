@@ -11,7 +11,8 @@ const CustomSelect = ({ options, withDefault, defValue, changeHandler, _pageLimi
 
   return (
     <>
-      <Select w='20%' value={_pageLimit}
+      <Select value={_pageLimit}
+        focusBorderColor="accentOne"
         onChange={e => {
           const targetEl = e.target as HTMLSelectElement;
           changeHandler !== undefined ? changeHandler((parseInt(targetEl.value))) : null;

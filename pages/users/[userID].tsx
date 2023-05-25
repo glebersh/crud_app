@@ -1,11 +1,11 @@
-import UserInfoBlock from "@/components/UserInfoBlock";
+import UserInfoBlock from "@/components/_userPage/UserInfoBlock";
 import { useGetSingleUser } from "@/hooks";
 import { getUser } from "@/lib/apiHelpers";
 import { MongoDBUserModel } from "@/types";
 import { GetServerSidePropsContext } from "next";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
-import AuthProvider from "@/components/AuthProvider/AuthProvider";
+import AuthProvider from "@/components/_utils/AuthProvider/AuthProvider";
 import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";

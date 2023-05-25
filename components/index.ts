@@ -1,18 +1,18 @@
-import AlertBlock from "./Alert";
-import AddUserFormInput from "./AddUserFormInput";
-import FormTitle from "./FormTitle";
-import Header from "./Header";
-import ModalWindow from "./ModalWindow";
-import NavigationLink from "./NavigationLink";
-import PageAnimationWrapper from "./PageAnimationWrapper";
-import PaginationBlock from "./PaginationBlock";
+import AlertBlock from "./_utils/Alert";
+import AddUserFormInput from "./_addUserForm/AddUserFormInput";
+import FormTitle from "./_addUserForm/FormTitle";
+import Header from "./_utils/Header";
+import ModalWindow from "./_utils/ModalWindow";
+import NavigationLink from "./_utils/NavigationLink";
+import PageAnimationWrapper from "./_utils/PageAnimationWrapper";
+import PaginationBlock from "./_userDataTable/PaginationBlock";
 import Searchbar from "../UI/CustomSearchbar";
-import TableHeaderItem from "./TableHeaderItem";
-import TableRow from "./TableRow";
-import UserDataTable from "./UserDataTable";
-import UserDataTableWrapper from "./UserDataTableWrapper";
-import AddUserForm from "./AddUserForm";
-import AddAddUserFormWrapper from "./AddUserFormWrapper";
+import TableRow from "./_userDataTable/TableRow";
+import TableHeaderItem from "./_userDataTable/TableHeaderItem";
+import UserDataTable from "./_userDataTable/UserDataTable";
+import UserDataTableWrapper from "./_userDataTable/UserDataTableWrapper";
+import AddUserForm from "./_addUserForm/AddUserForm";
+import AddAddUserFormWrapper from "./_addUserForm/AddUserFormWrapper";
 
 export {
   AlertBlock,

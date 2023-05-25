@@ -53,14 +53,15 @@ export const ColorModeButtonStylesDark = {
 export const RowDefaultStyles = {
   style: {
     height: '80px',
+    borderBottom: '1px solid #aaaaaa60'
   }
 };
 
 export const UserRowIconsStyles = {
-  transition: 'all 0.33s ease-in-out',
-  fontSize: '1.25em',
-  mb: '0.25em',
-  _hover: { cursor: 'pointer', color: 'red' }
+  style: {
+    transition: 'all 0.33s ease-in-out',
+    fontSize: '1.25em',
+  }
 };
 
 export const LoginFormIconStyles = {
@@ -68,5 +69,19 @@ export const LoginFormIconStyles = {
     fontSize: '1.35em',
     color: 'darkgray',
     transition: 'all 0.33s',
+  }
+};
+
+export const LoginButtonStyles = {
+  backgroundColor: 'accentOne',
+  color: 'white',
+  fontWeight: '700',
+  transition: 'all .33s ease-in-out',
+  _hover: {
+    cursor: 'pointer',
+    backgroundColor: '#3388ff',
+  },
+  _active: {
+    transform: 'scale(0.95, 0.95)'
   }
 };
