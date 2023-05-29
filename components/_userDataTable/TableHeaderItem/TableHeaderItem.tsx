@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@/store/hooks/useAppDispatch";
 import { columnSortSelector } from "@/store/selectors";
-import { setColumnSort } from "@/store/slices/formSlice";
+import { setColumnSort } from "@/store/slices/filtersSlice";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { Flex, useColorModeValue } from "@chakra-ui/react";
 import { useSelector } from "react-redux";

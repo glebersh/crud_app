@@ -1,8 +1,8 @@
-import { FormDataType, FormValidationResult } from "@/types";
+import { FormDataType } from "@/types";
 
-export const formValidation = (formData: FormDataType): { status: boolean, validationResult?: FormValidationResult } => {
+export const formValidation = (formData: FormDataType) => {
   const { first_name, last_name, email, salary, birth_date, status, gender } = formData;
-  let validationResult: FormValidationResult = {
+  let validationResult = {
     first_name: false, last_name: false, email: false, salary: false, birth_date: false, status: false, gender: false,
   };
 
