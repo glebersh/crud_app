@@ -4,7 +4,6 @@ import { Box, Flex, Spinner } from "@chakra-ui/react";
 import { filtersSelector, paginationDataSelector } from "@/store/selectors";
 import { useGetUsers } from "@/hooks/";
 import { useFilterUsers } from "@/hooks/useFilterUsers";
-import FiltersDropoutMenu from "../MapFiltersDropout/MapFiltersDropout";
 import { useBackgroundColor } from "@/hooks/useBackgroundColor";
 import TableFiltersWrapper from "../TableFiltersWrapper";
 
@@ -27,9 +26,7 @@ const UserDataTableWrapper = () => {
         p='1em 0 2.5em 0'
         backgroundColor={bgColor}
         boxShadow='rgba(99, 99, 99, 0.2) 0px 2px 8px 0px'>
-
         <TableFiltersWrapper />
-
       </Flex>
       <Flex direction='column' alignItems='center'>
         {isLoading && <Spinner w='150px' h='150px' color='accentOne' />}

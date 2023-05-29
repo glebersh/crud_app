@@ -1,17 +1,16 @@
 import Link from "next/link";
 import { MongoDBUserModel } from "@/types";
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useDeleteUser } from "@/hooks/useDeleteUser";
 import { RowDefaultStyles, UserRowIconsStyles } from "@/styles/additionalStyles";
-import { Text, Tooltip, useColorModeValue } from "@chakra-ui/react";
+import { Text, Tooltip } from "@chakra-ui/react";
 import { AnimatePresence, motion } from 'framer-motion';
 import { useToggleFormUpdate } from "@/hooks";
+import { BsPencilSquare, BsPersonDashFill } from "react-icons/bs";
 
 const TableRow = ({ user, haveBorder }: { user: MongoDBUserModel, haveBorder?: boolean }) => {
-  const { _id, name, email, salary, birth_date, status, sex } = user;
+  const { _id, name, email, salary, birth_date, status, gender } = user;
 
   const deleteUser = useDeleteUser();
-  const iconCol = useColorModeValue('accentOne', 'accentOne');
   const updateUserHandler = useToggleFormUpdate(user, _id)
 
   const alertAnimations = {
@@ -45,20 +44,25 @@ const TableRow = ({ user, haveBorder }: { user: MongoDBUserModel, haveBorder?: b
         <td>{email}</td>
         <td>{birth_date}</td>
         <td>{salary}</td>
-        <td>{sex.toUpperCase()}</td>
+        <td>{gender.toUpperCase()}</td>
         <td>{status.toUpperCase()}</td>
         <td>
           <Tooltip label='Edit user'>
-            <i className="bi bi-pencil-square"
-              onClick={updateUserHandler}
-              {...UserRowIconsStyles} />
+            <Text>
+              <BsPencilSquare className="row_user_actions_icon"
+                onClick={updateUserHandler}
+                {...UserRowIconsStyles} />
+            </Text>
           </Tooltip>
         </td>
         <td>
           <Tooltip label='Delete user'>
-            <i className="bi bi-person-dash-fill"
-              onClick={() => deleteUser(_id)}
-              {...UserRowIconsStyles} />
+            <Text>
+              <BsPersonDashFill
+                className="row_user_actions_icon"
+                onClick={() => deleteUser(_id)}
+                {...UserRowIconsStyles} />
+            </Text>
           </Tooltip>
         </td>
       </motion.tr>

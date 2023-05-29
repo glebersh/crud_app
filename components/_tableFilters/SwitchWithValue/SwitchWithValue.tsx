@@ -1,7 +1,5 @@
-import { RootState } from "@/store";
 import { Flex, Switch, Text } from "@chakra-ui/react";
 import { ChangeEvent } from "react";
-import { useSelector } from "react-redux";
 
 type CustomSwitchProps = {
   valueOne: string,
@@ -12,7 +10,6 @@ type CustomSwitchProps = {
 };
 
 const CustomSwitchWithValue = ({ valueOne, valueTwo, isDisabled, isChecked, changeHandler }: CustomSwitchProps) => {
-  const filtersState = useSelector((state: RootState) => state.clientReducer.filters.mapFilters);
 
   return (
     <>
@@ -20,8 +17,8 @@ const CustomSwitchWithValue = ({ valueOne, valueTwo, isDisabled, isChecked, chan
         <Text>{valueOne}</Text>
         <Switch
           isDisabled={!isDisabled}
-          isChecked={filtersState.sex === 'female'}
-          value={isChecked ? 'male' : 'female'}
+          isChecked={isChecked}
+          value={isChecked ? valueOne : valueTwo}
           onChange={e => changeHandler(e)}
         />
         <Text>{valueTwo}</Text>

@@ -1,13 +1,12 @@
 import { extractPath } from "@/lib/extractPath";
-import { ColorModeButtonStylesDark, ColorModeButtonStylesLight, LinkStyleButtonStyles } from "@/styles/additionalStyles";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { Box, Flex, Button, useColorMode, Tooltip, Text, Image } from "@chakra-ui/react";
+import { ColorModeButtonStylesDark, ColorModeButtonStylesLight } from "@/styles/additionalStyles";
+import { Box, Flex, Button, useColorMode, Tooltip, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import NavigationLink from "../NavigationLink";
 import AdminInfo from "../AdminInfo";
+import { BsBell, BsEnvelopeAt, BsMoonFill, BsSun } from "react-icons/bs";
 
 const Header = () => {
-
   const { colorMode, toggleColorMode } = useColorMode();
   const router = useRouter();
   const navigation = extractPath(router);
@@ -26,13 +25,13 @@ const Header = () => {
 
             <Tooltip label='There is nothing yet'>
               <Button backgroundColor={'transparent'} h='50px' w='50px' borderRadius='50%' _hover={{ backgroundColor: isLight ? '#EEE' : '#55555550' }}>
-                <i className="bi bi-envelope-at" style={{ fontSize: '1.25em', color: isLight ? '#777' : '#ddd' }}></i>
+                <BsEnvelopeAt fontSize='1.25em' color={isLight ? '#777' : '#ddd'} />
               </Button>
             </Tooltip>
 
             <Tooltip label='There is nothing yet'>
               <Button backgroundColor={'transparent'} h='50px' w='50px' borderRadius='50%' _hover={{ backgroundColor: isLight ? '#EEE' : '#55555550' }}>
-                <i className="bi bi-bell" style={{ fontSize: '1.25em', color: isLight ? '#777' : '#ddd' }}></i>
+                <BsBell fontSize='1.25em' color={isLight ? '#777' : '#ddd'} />
               </Button>
             </Tooltip>
 
@@ -40,17 +39,16 @@ const Header = () => {
               onClick={() => toggleColorMode()}>
               {
                 isLight ?
-                  <MoonIcon {...isLight ? ColorModeButtonStylesLight : ColorModeButtonStylesDark} />
+                  <BsMoonFill {...isLight ? ColorModeButtonStylesLight : ColorModeButtonStylesDark} />
                   :
-                  <SunIcon {...isLight ? ColorModeButtonStylesLight : ColorModeButtonStylesDark} />
+                  <BsSun {...isLight ? ColorModeButtonStylesLight : ColorModeButtonStylesDark} />
               }
             </Button>
           </Flex>
         </Flex>
-        {/* <hr style={{ width: '100%', margin: '1em 0' }} />
-        <Box >
+        <Box>
           <NavigationLink paths={navigation} />
-        </Box> */}
+        </Box>
       </Flex>
     </Flex>
   )

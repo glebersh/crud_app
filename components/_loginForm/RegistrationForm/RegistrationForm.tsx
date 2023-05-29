@@ -3,6 +3,7 @@ import { Flex, Input, Text } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import AuthFormInput from "../AuthFormInput";
 import { useSignUp } from "@/hooks";
+import { BsEyeFill, BsFillEyeSlashFill, BsFingerprint, BsMailbox2, BsPersonBoundingBox, BsPersonWorkspace } from "react-icons/bs";
 
 const RegistrationForm = ({ successHandler }: { successHandler: () => void }) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -18,7 +19,7 @@ const RegistrationForm = ({ successHandler }: { successHandler: () => void }) =>
       <Flex alignItems='center' direction='column' w='50%' m='2em auto' gap='1.5em'>
         <Flex direction='column' alignItems='center'>
           <Flex alignItems='center' gap='1em'>
-            <i className="bi bi-person-workspace" style={{ fontSize: '2em' }}></i>
+            <BsPersonWorkspace fontSize={'2em'} />
             <Text fontSize='3em'>Sign Up</Text>
           </Flex>
         </Flex>
@@ -27,7 +28,7 @@ const RegistrationForm = ({ successHandler }: { successHandler: () => void }) =>
           label='First Name'
           id='first_name'
           name='first_name'
-          icon={<i className="bi bi-person-bounding-box" {...LoginFormIconStyles}></i>}
+          icon={<BsPersonBoundingBox {...LoginFormIconStyles} />}
           type='text'
           changeHandler={formikRegistration.handleChange} />
 
@@ -35,7 +36,7 @@ const RegistrationForm = ({ successHandler }: { successHandler: () => void }) =>
           label='Last Name'
           id='last_name'
           name='last_name'
-          icon={<i className="bi bi-person-bounding-box" {...LoginFormIconStyles}></i>}
+          icon={<BsPersonBoundingBox {...LoginFormIconStyles} />}
           type='text'
           changeHandler={formikRegistration.handleChange} />
 
@@ -43,7 +44,7 @@ const RegistrationForm = ({ successHandler }: { successHandler: () => void }) =>
           label='Email'
           id='email'
           name='email'
-          icon={<i className="bi bi-mailbox2" {...LoginFormIconStyles}></i>}
+          icon={<BsMailbox2 {...LoginFormIconStyles} />}
           type='email'
           changeHandler={formikRegistration.handleChange} />
 
@@ -53,8 +54,11 @@ const RegistrationForm = ({ successHandler }: { successHandler: () => void }) =>
           name='password'
           icon={
             <>
-              <i className={`bi bi-eye-${isVisible ? 'slash-' : ''}fill`} {...LoginFormIconStyles} onClick={() => setIsVisible(!isVisible)} />
-              <i className="bi bi-fingerprint" {...LoginFormIconStyles}></i>
+              {!isVisible ?
+                <BsEyeFill onClick={() => setIsVisible(!isVisible)} {...LoginFormIconStyles} />
+                :
+                <BsFillEyeSlashFill onClick={() => setIsVisible(!isVisible)} {...LoginFormIconStyles} />}
+              <BsFingerprint {...LoginFormIconStyles} />
             </>
           }
           type={isVisible ? 'text' : 'password'}
@@ -67,9 +71,11 @@ const RegistrationForm = ({ successHandler }: { successHandler: () => void }) =>
           name='cPassword'
           icon={
             <>
-              <i className={`bi bi-eye-${isConfirmVisible ? 'slash-' : ''}fill`} {...LoginFormIconStyles}
-                onClick={() => setIsConfirmVisible(!isConfirmVisible)} />
-              <i className="bi bi-fingerprint" {...LoginFormIconStyles}></i>
+              {!isConfirmVisible ?
+                <BsEyeFill onClick={() => setIsConfirmVisible(!isConfirmVisible)} {...LoginFormIconStyles} />
+                :
+                <BsFillEyeSlashFill onClick={() => setIsConfirmVisible(!isConfirmVisible)} {...LoginFormIconStyles} />}
+              <BsFingerprint {...LoginFormIconStyles} />
             </>
           }
           type={isConfirmVisible ? 'text' : 'password'}

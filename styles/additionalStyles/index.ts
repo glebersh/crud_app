@@ -60,7 +60,7 @@ export const RowDefaultStyles = {
 export const UserRowIconsStyles = {
   style: {
     transition: 'all 0.33s ease-in-out',
-    fontSize: '1.25em',
+    fontSize: '1.3em',
   }
 };
 

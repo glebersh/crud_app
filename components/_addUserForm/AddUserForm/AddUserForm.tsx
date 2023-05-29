@@ -1,99 +1,157 @@
-import CustomChakraFlex from "@/UI/CustomChakraFlex";
-import { RootState } from "@/store";
-import { DefaultWrapperStyles, AddUserFormInputDefaultStyles, AddUserFormInputErrorStyles, ButtonDefaultStyles } from "@/styles/additionalStyles";
-import { Input, Select, FormLabel, Radio, useColorModeValue, Box, Flex, Textarea } from "@chakra-ui/react";
-import { ChangeEvent, FormEvent } from 'react';
+import { DefaultWrapperStyles, AddUserFormInputDefaultStyles, ButtonDefaultStyles } from "@/styles/additionalStyles";
+import { Input, FormLabel, Radio, Box, Flex } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-import AddUserFormInput from "../AddUserFormInput/AddUserFormInput";
-import FormTitle from "../FormTitle/FormTitle";
-import { useBackgroundColor } from "@/hooks/useBackgroundColor";
+import AddUserFormInput from "../AddUserFormInput/";
+import FormTitle from "../FormTitle/";
+import { useBackgroundColor, useAddForm } from "@/hooks/";
+import { formSelectDeparmentOptions, formSelectGenderOptions } from "@/consts";
+import { FormDataType } from "@/types";
+import { formDataSelector } from "@/store/selectors";
+import AddFormSectionHeader from "../AddFormSectionHeader/";
+import AddUserFormSelect from "../AddUserFormSelect/";
+import AddUserFormTextarea from "../AddUserFormTextarea/";
+import AddUserFormRadio from "../AddUserFormRadio";
+import { BsFileEarmarkPersonFill, BsInfoSquare, BsTelephoneFill, BsUiChecks } from "react-icons/bs";
+import { AiOutlineContacts } from "react-icons/ai";
+import { GrContactInfo } from "react-icons/gr";
 
-const AddUserForm = ({ updateInputHandler, onSubmit }: { updateInputHandler: (e: ChangeEvent) => void, onSubmit: (e: FormEvent<HTMLFormElement>) => void }) => {
-  const formSelectOptions = [{ title: 'Male', value: 'male' }, { title: 'Female', value: 'female' }];
+type AddFormProps = {
+  submitHandler: (values: FormDataType) => void
+};
 
-  const formData = useSelector((state: RootState) => state.clientReducer.formData);
-  const isValidationFailed = useSelector((state: RootState) => state.clientReducer.formValidation.validatedInputs);
+const AddUserForm = ({ submitHandler }: AddFormProps) => {
   const bg = useBackgroundColor();
-  const btnBgc = useColorModeValue('accentOne', 'accentOne');
-
+  const formData = useSelector(formDataSelector);
+  const addFormik = useAddForm(formData, submitHandler);
 
   return (
-    <form onSubmit={e => onSubmit(e)}>
+    <form onSubmit={addFormik.handleSubmit}>
       <Flex direction='column' alignItems='center' {...DefaultWrapperStyles} p='2em 0' backgroundColor={bg}>
 
         <FormTitle />
 
-        <Flex m='0 auto' w='100%' direction='row' justifyContent='space-evenly'>
-          <Box w='35%'>
+        <Flex w='80%' direction='column' m='0 auto' gap='1em'>
+          <AddFormSectionHeader
+            icon={<GrContactInfo />}
+            label="Personal Details" />
+          <Flex>
+            <Flex direction="column" w='42%' gap='1em'>
+              <AddUserFormInput
+                label='First name'
+                value={addFormik.values.first_name}
+                name="first_name"
+                id='first_name_input'
+                changeHandler={addFormik.handleChange}
+              />
+              <AddUserFormInput
+                label='Last name'
+                value={addFormik.values.last_name}
+                name="last_name"
+                id='last_name_input'
+                changeHandler={addFormik.handleChange}
+              />
+            </Flex>
 
-            <AddUserFormInput formData={formData} isValidated={isValidationFailed} name="first_name" id='first_name_input' changeHandler={updateInputHandler} />
-            <AddUserFormInput formData={formData} isValidated={isValidationFailed} name="last_name" id='last_name_input' changeHandler={updateInputHandler} />
+            <Flex direction="column" w='42%' ml='auto'>
+              <AddUserFormSelect
+                label='Gender'
+                id='gender_form_select'
+                name='gender'
+                changeHandler={addFormik.handleChange}
+                value={addFormik.values.gender}
+                options={formSelectGenderOptions}
+              />
 
-            <FormLabel htmlFor='sexParameter_select' m='1.5em 0 .5em'>Sex</FormLabel>
-            <Select
-              value={formData.sex}
-              focusBorderColor={btnBgc}
-              id='sexParameter_select'
-              name='sex'
-              onChange={e => updateInputHandler(e)}
-              {...AddUserFormInputDefaultStyles}>
-              <option value='default' disabled>Choose an option</option>
-              {
-                formSelectOptions.map(option =>
-                  <option
-                    value={option.value}
-                    key={option.value}>
-                    {option.title}
-                  </option>
-                )
-              }
-            </Select>
-
-            <FormLabel htmlFor='birth_date_input' m='1.5em 0 .5em'>Birth Date</FormLabel>
-            <Input
-              type='date'
-              required
-              focusBorderColor={btnBgc}
-              value={formData.birth_date}
-              id='birth_date_input'
-              name='birth_date'
-              onChange={e => updateInputHandler(e)}
-              {...AddUserFormInputDefaultStyles}
-              {...!isValidationFailed.first_name ? AddUserFormInputErrorStyles : null}
-            />
-          </Box>
-
-          <Box w='35%'>
-            <AddUserFormInput formData={formData} isValidated={isValidationFailed} name="email" id='email_input' changeHandler={updateInputHandler} />
-            <AddUserFormInput formData={formData} isValidated={isValidationFailed} name="salary" id='salary_input' changeHandler={updateInputHandler} />
-
-            <CustomChakraFlex styles={{ flexDirection: 'column', alignItems: 'flex-start', gap: '1em' }}>
-              <FormLabel m='1.5em 0 .5em'>Choose user status</FormLabel>
-              <Flex gap='.5em'>
-                <Radio name='status' value='active' size='lg'
-                  isChecked={formData.status === 'active'}
-                  colorScheme="blue"
-                  onChange={e => updateInputHandler(e)}
-                /> Active
-              </Flex>
-              <Flex gap='.5em'>
-                <Radio name='status' value='inactive' size='lg'
-                  colorScheme="blue"
-                  isChecked={formData.status === 'inactive'}
-                  onChange={e => updateInputHandler(e)}
-                /> Inactive
-              </Flex>
-            </CustomChakraFlex>
-
-          </Box>
+              <FormLabel htmlFor='birth_date_input' mt='1em'>Birth Date</FormLabel>
+              <Input
+                value={addFormik.values.birth_date}
+                type='date'
+                required
+                focusBorderColor={'accentOne'}
+                id='birth_date_input'
+                name='birth_date'
+                onChange={addFormik.handleChange}
+                {...AddUserFormInputDefaultStyles}
+              />
+            </Flex>
+          </Flex>
         </Flex>
-        {/* <Textarea w='80%' mt='3em' /> */}
 
-        <Input type='submit' {...ButtonDefaultStyles} value='Submit' w='20%' m='2em auto 0' _hover={{ backgroundColor: btnBgc, cursor: 'pointer' }} />
+        <Flex w='80%' direction='column' m='1.5em auto 0' gap='1em'>
+          <AddFormSectionHeader icon={<AiOutlineContacts />} label="Contact Details" />
+          <Flex>
+            <Box w='42%'>
+              <AddUserFormInput
+                label='Email' placeholder="e.g. johnwick@example.com"
+                value={addFormik.values.email}
+                name="email" id='email_input'
+                changeHandler={addFormik.handleChange} />
+            </Box>
+            <Flex direction="column" w='42%' ml='auto'>
+              <FormLabel>Phone</FormLabel>
+              <Input type='tel'
+                focusBorderColor="accentOne"
+                value={addFormik.values.phone}
+                name="phone" id='phone_input'
+                onChange={addFormik.handleChange}
+                {...AddUserFormInputDefaultStyles} />
+            </Flex>
+          </Flex>
+        </Flex>
+
+        <Flex w='80%' direction='column' m='1.5em auto 0' gap='1em'>
+          <AddFormSectionHeader icon={<BsUiChecks />} label="Job Details" />
+          <Flex>
+            <Flex w='42%' direction='column' gap='1em'>
+              <AddUserFormSelect
+                label='Department'
+                id='department_form_select'
+                name='department'
+                changeHandler={addFormik.handleChange}
+                value={addFormik.values.department}
+                options={formSelectDeparmentOptions}
+              />
+              <AddUserFormInput
+                label='Salary'
+                value={addFormik.values.salary}
+                name="salary" id='salary_input'
+                changeHandler={addFormik.handleChange} />
+            </Flex>
+            <Flex direction="column" w='42%' ml='auto'>
+              <AddUserFormInput
+                label='Desired position'
+                value={addFormik.values.desiredPosition}
+                name="desiredPosition"
+                id='desired_position_input'
+                changeHandler={addFormik.handleChange}
+              />
+              <AddUserFormRadio
+                formLabel="Select user status"
+                valueOne='active' valueTwo='inactive'
+                labelOne='Active' labelTwo='Inactive'
+                changeHandler={addFormik.handleChange}
+                formValue={addFormik.values.status}
+                name='status' />
+            </Flex>
+          </Flex>
+        </Flex>
+
+        <Box w='80%' m='1.5em auto'>
+          <AddFormSectionHeader icon={<BsInfoSquare />} label="Additional Info" />
+          <Box mt='1em'>
+            <AddUserFormTextarea
+              label='About'
+              id='about_textarea'
+              name='about'
+              changeHandler={addFormik.handleChange}
+              value={addFormik.values.about} />
+          </Box>
+        </Box>
+        <Input type='submit' {...ButtonDefaultStyles} value='Submit' w='20%' m='.5em auto 0'
+          _hover={{ backgroundColor: 'accentOne', cursor: 'pointer' }} />
       </Flex>
     </form>
   )
 };
-
 
 export default AddUserForm;

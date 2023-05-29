@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@/store/hooks/useAppDispatch";
-import { fillUpForm, formTypeHandler, setCurrentUser, toggleFormVisibility } from '../store/slices/clientSlice';
+import { fillUpForm, formTypeHandler, setCurrentUser, toggleFormVisibility } from '../store/slices/formSlice';
 import { MongoDBUserModel } from "@/types";
 
 export const useToggleFormUpdate = (user: MongoDBUserModel, _id: string) => {
@@ -14,7 +14,7 @@ export const useToggleFormUpdate = (user: MongoDBUserModel, _id: string) => {
   return () => {
     dispatch(toggleFormVisibility());
     dispatch(formTypeHandler('update'));
-    dispatch(setCurrentUser(_id));
     dispatch(fillUpForm(updatedUser));
+    dispatch(setCurrentUser(_id));
   }
 };

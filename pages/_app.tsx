@@ -1,4 +1,4 @@
-import '@/styles/globals.css'
+import '@/styles/globals.css';
 import type { AppProps } from 'next/app'
 import chakraTheme from '../theme';
 import { ChakraProvider } from '@chakra-ui/react';
@@ -7,7 +7,6 @@ import store from '@/store';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { AnimatePresence } from 'framer-motion';
-import { Header } from '@/components';
 import { SessionProvider } from 'next-auth/react';
 import { Session } from 'next-auth';
 

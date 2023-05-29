@@ -1,10 +1,10 @@
 import { Select } from "@chakra-ui/react";
 import { SelectOptionType } from "@/types";
 
-const CustomSelect = ({ options, withDefault, defValue, changeHandler, _pageLimit }:
+const CustomSelect = ({ options, withDefault, changeHandler, _pageLimit }:
   {
     options: SelectOptionType[], withDefault?: boolean, defValue?: string | number,
-    changeHandler?: (val: number) => { payload: number; type: "clientReducer/setLimit"; },
+    changeHandler?: (val: string) => void,
     _pageLimit?: string | number
   }) => {
 
@@ -15,7 +15,7 @@ const CustomSelect = ({ options, withDefault, defValue, changeHandler, _pageLimi
         focusBorderColor="accentOne"
         onChange={e => {
           const targetEl = e.target as HTMLSelectElement;
-          changeHandler !== undefined ? changeHandler((parseInt(targetEl.value))) : null;
+          changeHandler !== undefined ? changeHandler(targetEl.value) : null;
         }}>
         {withDefault && <option value='default'>Choose an option</option>}
         {

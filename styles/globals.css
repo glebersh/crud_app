@@ -52,3 +52,17 @@ html[data-theme='dark'] {
   background-color: #3399ff;
   background-image: linear-gradient(315deg, rgb(223, 116, 216) 3%, rgba(60, 132, 206, 1) 38%, rgba(48, 238, 226, 1) 68%, rgb(45, 117, 224) 98%);
 }
+
+.row_user_actions_icon {
+  transition: all .33s ease-in-out;
+  color: #444
+}
+
+.row_user_actions_icon:hover {
+  color: #3399ff;
+  cursor: pointer;
+}
+
+.row_user_actions_icon:active {
+  transform: scale(0.95, 0.95);
+}

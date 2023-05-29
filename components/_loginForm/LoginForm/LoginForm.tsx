@@ -3,6 +3,7 @@ import { Box, Flex, Input, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import AuthFormInput from "../AuthFormInput";
 import { useSignIn } from "@/hooks/";
+import { BsEyeFill, BsFillEyeSlashFill, BsFingerprint, BsMailbox2, BsPersonWorkspace } from "react-icons/bs";
 
 const LoginForm = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -16,7 +17,7 @@ const LoginForm = () => {
       <Flex alignItems='center' direction='column' w='50%' m='2em auto' gap='2em'>
         <Flex direction='column' alignItems='center'>
           <Flex alignItems='center' gap='1em'>
-            <i className="bi bi-person-workspace" style={{ fontSize: '2em' }}></i>
+            <BsPersonWorkspace fontSize={'2em'}/>
             <Text fontSize='3em'>Sign In</Text>
           </Flex>
         </Flex>
@@ -34,7 +35,7 @@ const LoginForm = () => {
           label='Email'
           id='email'
           name='email'
-          icon={<i className="bi bi-mailbox2" {...LoginFormIconStyles}></i>}
+          icon={<BsMailbox2 {...LoginFormIconStyles} />}
           type='email'
           changeHandler={formikLogin.handleChange} />
 
@@ -44,9 +45,11 @@ const LoginForm = () => {
           name='password'
           icon={
             <>
-              <i className={`bi bi-eye-${isVisible ? 'slash-' : ''}fill`} {...LoginFormIconStyles} id='ooga'
-                onClick={() => setIsVisible(!isVisible)} />
-              <i className="bi bi-fingerprint" {...LoginFormIconStyles}></i>
+              {!isVisible ?
+                <BsEyeFill onClick={() => setIsVisible(!isVisible)} {...LoginFormIconStyles} />
+                :
+                <BsFillEyeSlashFill onClick={() => setIsVisible(!isVisible)} {...LoginFormIconStyles} />}
+              <BsFingerprint {...LoginFormIconStyles} />
             </>
           }
           type={isVisible ? 'text' : 'password'}

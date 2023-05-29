@@ -1,9 +1,9 @@
 import { FormDataType, FormValidationResult } from "@/types";
 
 export const formValidation = (formData: FormDataType): { status: boolean, validationResult?: FormValidationResult } => {
-  const { first_name, last_name, email, salary, birth_date, status, sex } = formData;
+  const { first_name, last_name, email, salary, birth_date, status, gender } = formData;
   let validationResult: FormValidationResult = {
-    first_name: false, last_name: false, email: false, salary: false, birth_date: false, status: false, sex: false,
+    first_name: false, last_name: false, email: false, salary: false, birth_date: false, status: false, gender: false,
   };
 
   if (/^[A-Za-zА-Яа-я]+$/.test(first_name)) {
@@ -18,8 +18,8 @@ export const formValidation = (formData: FormDataType): { status: boolean, valid
     validationResult.status = true;
   }
 
-  if (sex === 'male' || sex === 'female') {
-    validationResult.sex = true;
+  if (gender === 'male' || gender === 'female') {
+    validationResult.gender = true;
   }
 
   if (/\d/.test(salary)) {

@@ -1,13 +1,13 @@
-import { RootState } from "@/store";
 import { useAppDispatch } from "@/store/hooks/useAppDispatch";
-import { setPage } from "@/store/slices/clientSlice";
+import { paginationDataSelector } from "@/store/selectors";
+import { setPage } from "@/store/slices/paginationSlice";
 import { Flex, Button } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
 import { useSelector } from "react-redux";
 
 const PaginationBlock = React.memo(({ totalUsers }: { totalUsers: number }) => {
-  const _limit = useSelector((state: RootState) => state.clientReducer.paginationData.limit);
-  const _pageNum = useSelector((state: RootState) => state.clientReducer.paginationData.pageNumber);
+  const { limit: _limit, pageNumber: _pageNum } = useSelector(paginationDataSelector);
 
   const _btnsMax = 5;
   const dispatch = useAppDispatch();
@@ -51,7 +51,7 @@ const PaginationBlock = React.memo(({ totalUsers }: { totalUsers: number }) => {
       }}
         variant={'outline'}
         isDisabled={_pageNum === 1} fontSize='1.5em' borderColor='transparent'>
-        <i className="bi bi-arrow-left-short"></i>
+        <BsArrowLeftShort />
       </Button>
       {
         range.map((val, index: number) =>
@@ -72,7 +72,7 @@ const PaginationBlock = React.memo(({ totalUsers }: { totalUsers: number }) => {
       }}
         variant={'outline'}
         isDisabled={_pageNum === Math.ceil(totalUsers / _limit)} fontSize='1.5em' borderColor='transparent'>
-        <i className="bi bi-arrow-right-short"></i>
+        <BsArrowRightShort />
       </Button>
     </Flex >
   )

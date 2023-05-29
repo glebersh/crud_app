@@ -1,10 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import clientReducer from './slices/clientSlice';
+import formReducer from './slices/formSlice';
+import operationResultReducer from './slices/operationResultSlice';
+import filtersReducer from './slices/filtersSlice';
+import paginationReducer from './slices/paginationSlice';
 
 const store = configureStore({
   reducer: {
-    clientReducer
+    formReducer,
+    filtersReducer,
+    paginationReducer,
+    operationResultReducer,
   }
 });
 

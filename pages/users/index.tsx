@@ -1,22 +1,10 @@
-import { AddAddUserFormWrapper, AlertBlock, Header, ModalWindow, UserDataTableWrapper } from "@/components";
+import { AddUserFormWrapper, AlertBlock, Header, ModalWindow, UserDataTableWrapper } from "@/components";
 import PageAnimationWrapper from "@/components/_utils/PageAnimationWrapper"
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { useSession } from 'next-auth/react';
-import { useEffect } from "react";
 import AuthProvider from "@/components/_utils/AuthProvider/AuthProvider";
-import StatBlock from "@/components/_utils/StatBlock/StatBlock";
-import { useQueryClient } from "@tanstack/react-query";
-import { MongoDBUserModel } from "@/types";
-import { Box, Flex } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 
 const UsersPage = () => {
-
-  const client = useQueryClient();
-  const totalUsers = client.getQueryData<{ users: MongoDBUserModel[], count: number }>(['users']);
-  const activeUsers = totalUsers?.users.filter((user: MongoDBUserModel) => user.status === 'inactive').length;
-
-
   return (
     <AuthProvider>
       <PageAnimationWrapper>
@@ -26,30 +14,14 @@ const UsersPage = () => {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <>
-          <Header />
-          <AlertBlock />
-
-
-          <Flex justify={'flex-start'} flexDirection='column'>
-            {/* <Flex>
-              <StatBlock statValue={totalUsers?.count ? totalUsers.count : 0}
-                statIcon={<i className="bi bi-person-fill"></i>}
-                statTitle="Total users" />
-              <StatBlock statValue={totalUsers?.users && activeUsers ? activeUsers : 0}
-                statIcon={<i className="bi bi-person-check-fill"></i>}
-                statTitle="Active users" />
-            </Flex> */}
-            <Box>
-              <UserDataTableWrapper />
-            </Box>
-          </Flex>
-
-
-          <ModalWindow>
-            <AddAddUserFormWrapper />
-          </ModalWindow>
-        </>
+        <Header />
+        <AlertBlock />
+        <Flex justify='flex-start' flexDirection='column'>
+          <UserDataTableWrapper />
+        </Flex>
+        <ModalWindow>
+          <AddUserFormWrapper />
+        </ModalWindow>
       </PageAnimationWrapper>
     </AuthProvider>
   )

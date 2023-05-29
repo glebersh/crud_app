@@ -12,7 +12,7 @@ const CheckboxWithLabel = ({ changeHandler, label, isChecked }: CheckboxWithLabe
     <>
       <Flex alignItems='center'>
         <FormLabel>{label}</FormLabel>
-        <Checkbox onChange={e => changeHandler(e)} isChecked={isChecked ? isChecked : undefined} />
+        <Checkbox onChange={e => changeHandler(e)} isChecked={isChecked ? isChecked : false} />
       </Flex>
     </>
   )

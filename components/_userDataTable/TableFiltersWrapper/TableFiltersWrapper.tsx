@@ -3,13 +3,15 @@ import { limitSelectOptions } from "@/consts";
 import { useToggleFormAdd } from "@/hooks";
 import { useAppDispatch } from "@/store/hooks/useAppDispatch";
 import { paginationDataSelector } from "@/store/selectors";
-import { setLimit, setSearchValue } from "@/store/slices/clientSlice";
+import { setLimit } from "@/store/slices/paginationSlice";
+import { setSearchValue } from "@/store/slices/filtersSlice";
 import { ButtonDefaultStyles, LoginButtonStyles } from "@/styles/additionalStyles";
 import { AddIcon } from "@chakra-ui/icons";
 import { Box, Button, FormLabel } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-import FiltersDropoutMenu from "../MapFiltersDropout";
+import FiltersDropoutMenu from "@/components/_tableFilters/MapFiltersDropout";
 import { useState } from "react";
+import { BsFilterLeft } from "react-icons/bs";
 
 const TableFiltersWrapper = () => {
   const dispatch = useAppDispatch();
@@ -22,7 +24,7 @@ const TableFiltersWrapper = () => {
       <Box>
         <FormLabel>Limit per page</FormLabel>
         <CustomSelect options={limitSelectOptions}
-          changeHandler={(val: number) => dispatch(setLimit(val))} _pageLimit={_pageLimit} />
+          changeHandler={val => dispatch(setLimit(parseInt(val)))} _pageLimit={_pageLimit} />
       </Box>
       <Box w='50%'>
         <CustomSearchbar changeHandler={(val: string) => dispatch(setSearchValue(val))} />
@@ -31,9 +33,9 @@ const TableFiltersWrapper = () => {
         <Button {...ButtonDefaultStyles}
           onClick={() => setDropoutVisibility(!isDropoutVisible)}>
           Filters
-          <i className="bi bi-filter-left" style={{ fontSize: '1.25em', marginLeft: '1em' }}></i>
+          <BsFilterLeft style={{ fontSize: '1.25em', marginLeft: '1em' }} />
         </Button>
-        <Box position='absolute' zIndex={888} display={isDropoutVisible ? 'block' : 'none'}>
+        <Box position='absolute' zIndex={888} display={isDropoutVisible ? 'block' : 'none'} mt='1em'>
           <FiltersDropoutMenu />
         </Box>
       </Box>

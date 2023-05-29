@@ -12,7 +12,7 @@ import TableHeaderItem from "./_userDataTable/TableHeaderItem";
 import UserDataTable from "./_userDataTable/UserDataTable";
 import UserDataTableWrapper from "./_userDataTable/UserDataTableWrapper";
 import AddUserForm from "./_addUserForm/AddUserForm";
-import AddAddUserFormWrapper from "./_addUserForm/AddUserFormWrapper";
+import AddUserFormWrapper from "./_addUserForm/AddUserFormWrapper";
 
 export {
   AlertBlock,
@@ -29,5 +29,5 @@ export {
   UserDataTable,
   UserDataTableWrapper,
   AddUserForm,
-  AddAddUserFormWrapper
+  AddUserFormWrapper
 };

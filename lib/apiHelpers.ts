@@ -1,4 +1,4 @@
-import { MongoDBUserModel, UserDataType } from "@/types";
+import { MongoDBUserModel, POSTReqFormDataType } from "@/types";
 import ky from 'ky';
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/`;
@@ -21,7 +21,7 @@ export async function getUser(userID: string): Promise<{ user: MongoDBUserModel 
   }
 };
 
-export async function createUser(formData: UserDataType): Promise<UserDataType | Error> {
+export async function createUser(formData: POSTReqFormDataType): Promise<MongoDBUserModel | Error> {
   try {
     return await api.post(`api/users`, { json: formData }).json();
   } catch (error) {
@@ -29,16 +29,18 @@ export async function createUser(formData: UserDataType): Promise<UserDataType |
   }
 };
 
-export async function updateUser(reqData: { userID: string, formData: UserDataType }): Promise<UserDataType | Error> {
+export async function updateUser(reqData: { userID: string, formData: POSTReqFormDataType }): Promise<MongoDBUserModel | Error> {
   const { userID, formData } = reqData;
   try {
+    console.log(`api/users/${userID}`);
+
     return await api.put(`api/users/${userID}`, { json: formData }).json();
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-export async function deleteUser(userID: string): Promise<UserDataType | Error> {
+export async function deleteUser(userID: string): Promise<MongoDBUserModel | Error> {
   try {
     return await api.delete(`api/users/${userID}`).json();
   } catch (error) {

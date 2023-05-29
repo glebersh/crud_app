@@ -2,7 +2,7 @@ import { PageAnimationWrapper } from '@/components';
 import LoginForm from '@/components/_loginForm/LoginForm';
 import ProvidersBlock from '@/components/_loginForm/ProvidersBlock';
 import RegistrationForm from '@/components/_loginForm/RegistrationForm';
-import { Box, Button, Flex, Text, useColorMode, useColorModeValue } from '@chakra-ui/react';
+import { Box, Button, Flex, Text, useColorMode } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -10,8 +10,8 @@ import { useEffect, useState } from 'react';
 import styles from '../styles/bgAnimation.module.css';
 import { LinkStyleButtonStyles } from '@/styles/additionalStyles';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-import { AnimatePresence, motion } from 'framer-motion';
 import { useBackgroundColor } from '@/hooks/useBackgroundColor';
+import { BsMoonFill, BsSun } from 'react-icons/bs';
 
 
 export default function Home() {
@@ -19,15 +19,6 @@ export default function Home() {
   const router = useRouter();
   const [isRegistration, setFormType] = useState(false);
   const bgColor = useBackgroundColor();
-
-
-  const formOpacityAnimation = {
-    key: 'formOpacityAnimation',
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
-    transition: { duration: 1 }
-  }
 
   useEffect(() => {
     if (session.status === 'authenticated') {
@@ -52,38 +43,38 @@ export default function Home() {
             onClick={() => toggleColorMode()}>
             {
               isLight ?
-                <MoonIcon color='white' fontSize='1.5em' _hover={{ cursor: 'pointer', color: '#EEE' }} transition='.33s' />
+                <BsMoonFill color='white' fontSize='1.5em'
+                //  _hover={{ cursor: 'pointer', color: '#EEE' }} transition='.33s'
+                />
                 :
-                <SunIcon color='white' fontSize='1.5em' _hover={{ cursor: 'pointer', color: '#EEE' }} transition='.33s' />
+                <BsSun color='white' fontSize='1.5em'
+                //  _hover={{ cursor: 'pointer', color: '#EEE' }} transition='.33s'
+                />
             }
           </Button>
-          <AnimatePresence>
-            {/* <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }}> */}
-            <Box backgroundColor={bgColor} w='50%' p='2em' m='0 auto' borderRadius='.5em' zIndex={999}>
+          <Box backgroundColor={bgColor} w='50%' p='2em' m='0 auto' borderRadius='.5em' zIndex={999}>
+            {
+              isRegistration ?
+                <RegistrationForm successHandler={() => setFormType(false)} />
+                :
+                <LoginForm />
+            }
+            <ProvidersBlock isRegistration={isRegistration} />
+            <Flex alignItems='center' w='100%' gap='.5em' justifyContent='center'>
               {
-                isRegistration ?
-                  <RegistrationForm successHandler={() => setFormType(false)} />
+                !isRegistration ?
+                  <>
+                    <Text>Don&apos;t have an account yet?</Text>
+                    <Button variant='link' onClick={() => setFormType(true)}>Sign up now</Button>
+                  </>
                   :
-                  <LoginForm />
+                  <>
+                    <Text>Already have an account?</Text>
+                    <Button variant='link' onClick={() => setFormType(false)}>Sign in now</Button>
+                  </>
               }
-              <ProvidersBlock isRegistration={isRegistration} />
-              <Flex alignItems='center' w='100%' gap='.5em' justifyContent='center'>
-                {
-                  !isRegistration ?
-                    <>
-                      <Text>Don&apos;t have an account yet?</Text>
-                      <Button variant='link' onClick={() => setFormType(true)}>Sign up now</Button>
-                    </>
-                    :
-                    <>
-                      <Text>Already have an account?</Text>
-                      <Button variant='link' onClick={() => setFormType(false)}>Sign in now</Button>
-                    </>
-                }
-              </Flex>
-            </Box>
-            {/* </motion.div> */}
-          </AnimatePresence>
+            </Flex>
+          </Box>
           <div className={isLight ? styles.wave : styles.wave_dark}></div>
           <div className={isLight ? styles.wave : styles.wave_dark}></div>
           <div className={isLight ? styles.wave : styles.wave_dark}></div>

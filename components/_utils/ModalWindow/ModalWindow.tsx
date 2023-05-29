@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@/store/hooks/useAppDispatch";
-import { closePopUp, toggleFormVisibility } from "@/store/slices/clientSlice";
+import { closePopUp, toggleFormVisibility } from "@/store/slices/formSlice";
 import { Flex } from "@chakra-ui/react";
 import { AnimatePresence } from "framer-motion";
 import { ReactNode, useCallback, useEffect } from "react";

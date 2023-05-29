@@ -1,10 +1,12 @@
 import CustomTag from "@/UI/CustomTag";
-import { RootState } from "@/store";
+import { toFirstLetterCapital } from "@/lib/capitalFirstLetter";
+import { mapFiltersSelector } from "@/store/selectors";
 import { Flex } from "@chakra-ui/react";
+import { BsFilterRight } from "react-icons/bs";
 import { useSelector } from "react-redux";
 
 const FilterTagsList = () => {
-  const filters = useSelector((state: RootState) => state.clientReducer.filters.mapFilters);
+  const filters = useSelector(mapFiltersSelector);
 
   return (
     <>
@@ -14,11 +16,12 @@ const FilterTagsList = () => {
             .map((item: string) =>
               filters[item as keyof typeof filters]
                 ?
-                <CustomTag label={`${item.slice(0, 1).toUpperCase() + item.slice(1)}:
-               ${String(filters[item as keyof typeof filters]).slice(0, 1).toUpperCase()
-                  +
-                  String(filters[item as keyof typeof filters]).slice(1)}`}
-                  icon={<i className="bi bi-filter-right" />} /> : null)
+                <CustomTag key={item}
+                  label={`${toFirstLetterCapital(item)}:
+               ${toFirstLetterCapital(String(filters[item as keyof typeof filters]))}`}
+                  icon={<BsFilterRight />} />
+                :
+                null)
         }
       </Flex >
     </>

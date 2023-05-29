@@ -12,7 +12,6 @@ const AdminInfo = () => {
   ${session.data?.user?.name?.split(' ')[0]}+
   ${session.data?.user?.name?.split(' ')[1]}
   &background=${isLight ? 'EEE' : '333'}&color=${isLight ? 'aaa' : 'bbb'}`;
-  console.log(session);
 
   return (
     <>

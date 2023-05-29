@@ -1,6 +1,6 @@
 import { deleteUser } from "@/lib/apiHelpers";
 import { useAppDispatch } from "@/store/hooks/useAppDispatch";
-import { setOperationResult, hideAlert } from "@/store/slices/clientSlice";
+import { hideAlert, setOperationResult } from "@/store/slices/operationResultSlice";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 
 export const useDeleteUser = () => {

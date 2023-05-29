@@ -1,10 +1,10 @@
 import { MongoDBUserModel } from "@/types";
 import { Box, Table } from "@chakra-ui/react";
-import TableRow from "../../TableRow";
-import TableHeaderItem from "../../TableHeaderItem";
+import TableRow from "../TableRow";
+import TableHeaderItem from "../TableHeaderItem";
 import { tableHeaders } from "@/consts";
 import { useSelector } from "react-redux";
-import { pageLimitSelector } from "@/store/selectors";
+import { pageLimitSelector, paginationDataSelector } from "@/store/selectors";
 import { useBackgroundColor } from "@/hooks/useBackgroundColor";
 import UserDataTableHeader from "../UserDataTableHeader";
 
@@ -13,7 +13,7 @@ const UserDataTable = ({ isLoading, isError, usersData, totalUsers }: {
 }) => {
 
   const bgColor = useBackgroundColor();
-  const _limit = useSelector(pageLimitSelector);
+  const { limit: _limit, pageNumber: _pageNum } = useSelector(paginationDataSelector);
 
   return (
     <Box backgroundColor={bgColor} w='70%' m='0 auto' p='2em 0' borderRadius='15px' boxShadow='rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' >
@@ -34,7 +34,7 @@ const UserDataTable = ({ isLoading, isError, usersData, totalUsers }: {
               usersData?.map((user: MongoDBUserModel, index: number) =>
                 <TableRow user={user}
                   key={user.name + index}
-                  haveBorder={index + 1 !== _limit} />)
+                  haveBorder={index + 1 !== _limit && (index + 1 + (_limit * (_pageNum - 1)) !== totalUsers)} />)
             }
           </tbody>
         </Table>

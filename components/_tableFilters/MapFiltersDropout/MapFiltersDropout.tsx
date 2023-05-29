@@ -1,24 +1,24 @@
 import { useBackgroundColor } from "@/hooks/useBackgroundColor";
-import { RootState } from "@/store";
 import { useAppDispatch } from "@/store/hooks/useAppDispatch";
-import { addMapFilter } from "@/store/slices/clientSlice";
-import { Checkbox, Flex, FormLabel, Slider, SliderFilledTrack, SliderThumb, SliderTrack, Switch, Text } from "@chakra-ui/react";
-import { ChangeEvent, useEffect, useReducer, useState } from "react";
+import { addMapFilter } from "@/store/slices/filtersSlice";
+import { Flex, Slider, SliderFilledTrack, SliderThumb, SliderTrack } from "@chakra-ui/react";
+import { useReducer, useState } from "react";
 import { useSelector } from "react-redux";
 import CustomSwitchWithValue from "../SwitchWithValue/SwitchWithValue";
 import CheckboxWithLabel from "../CheckboxWithLabel/CheckboxWithLabel";
+import { mapFiltersSelector } from "@/store/selectors";
 
 const FiltersDropoutMenu = () => {
 
   const initialState = {
     status: false,
-    sex: false,
+    gender: false,
     salary: false,
   };
 
   const defaultValues = {
     status: 'active',
-    sex: 'male',
+    gender: 'male',
     salary: 50000,
   };
 
@@ -27,10 +27,10 @@ const FiltersDropoutMenu = () => {
   };
 
   const [isDisabled, disableDispatch] = useReducer(disableReducer, initialState);
-  const [isChecked, setIsChecked] = useState({ status: false, sex: false });
+  const [isChecked, setIsChecked] = useState({ status: false, gender: false });
 
   const sliceDispatch = useAppDispatch();
-  const filtersState = useSelector((state: RootState) => state.clientReducer.filters.mapFilters);
+  const filtersState = useSelector(mapFiltersSelector);
 
   const [previousState, setPreviousState] = useState(filtersState);
 
@@ -46,7 +46,6 @@ const FiltersDropoutMenu = () => {
       const newState = { ...filtersState, [reducerField]: previousState[reducerField] };
       sliceDispatch(addMapFilter(newState));
     }
-
     disableDispatch({ field, payload: !isDisabled[reducerField] });
   };
 
@@ -54,15 +53,15 @@ const FiltersDropoutMenu = () => {
 
   return (
     <>
-      <Flex borderRadius='15px' direction='column'
+      <Flex borderRadius='15px' direction='column' id='filters_dropout_menu'
         backgroundColor={bgColor}
         boxShadow='rgba(99, 99, 99, 0.2) 0px 2px 8px 0px'>
 
         <Flex direction='column' borderBottom='1px solid #aaa' p='1em'>
           <CheckboxWithLabel changeHandler={() => disableHandler('status')} label='Status' isChecked={isDisabled.status} />
           <CustomSwitchWithValue
-            valueOne="Active"
-            valueTwo="Inactive"
+            valueOne="active"
+            valueTwo="inactive"
             isChecked={isChecked.status}
             isDisabled={isDisabled.status}
             changeHandler={e => {
@@ -73,16 +72,16 @@ const FiltersDropoutMenu = () => {
         </Flex>
 
         <Flex direction='column' borderBottom='1px solid #aaa' p='1em'>
-          <CheckboxWithLabel changeHandler={() => disableHandler('sex')} label='Sex' isChecked={isDisabled.sex} />
+          <CheckboxWithLabel changeHandler={() => disableHandler('gender')} label='Gender' isChecked={isDisabled.gender} />
           <CustomSwitchWithValue
-            valueOne="Male"
-            valueTwo="Female"
-            isChecked={isChecked.sex}
-            isDisabled={isDisabled.sex}
+            valueOne="male"
+            valueTwo="female"
+            isChecked={isChecked.gender}
+            isDisabled={isDisabled.gender}
             changeHandler={e => {
-              setIsChecked({ ...isChecked, sex: !isChecked.sex });
-              sliceDispatch(addMapFilter({ ...filtersState, sex: e.target.value }));
-              setPreviousState({ ...filtersState, sex: e.target.value });
+              setIsChecked({ ...isChecked, gender: !isChecked.gender });
+              sliceDispatch(addMapFilter({ ...filtersState, gender: e.target.value }));
+              setPreviousState({ ...filtersState, gender: e.target.value });
             }} />
         </Flex>
 

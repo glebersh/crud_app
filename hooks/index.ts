@@ -1,3 +1,4 @@
+import { useAddForm } from '@/hooks/useAddForm';
 import { useBackgroundColor } from '@/hooks/useBackgroundColor';
 import { useSignUp } from './useSignUp';
 import { useSignIn } from './useSignIn';
@@ -19,5 +20,6 @@ export {
   useGetSingleUser,
   useSignIn,
   useSignUp,
-  useBackgroundColor
+  useBackgroundColor,
+  useAddForm,
 };

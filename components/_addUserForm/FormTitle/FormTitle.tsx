@@ -1,5 +1,6 @@
 import { formTypeSelector } from '@/store/selectors';
 import { Flex, Text, useColorModeValue } from '@chakra-ui/react';
+import { BsPersonFillAdd, BsPersonFillUp } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 
 const FormTitle = () => {
@@ -13,10 +14,12 @@ const FormTitle = () => {
     <>
       <Flex justifyContent={'center'} alignItems='center' gap='1em'>
         <Flex backgroundColor={iconBgCol} borderRadius='50%' justifyContent={'center'} alignItems='center' h='50px' w='50px'>
-          {isAddUser ?
-            <i className="bi bi-person-fill-add" style={{ fontSize: '2em', color: iconColor }}></i>
-            :
-            <i className="bi bi-person-fill-up" style={{ fontSize: '2em', color: iconColor }}></i>}
+          {
+            isAddUser ?
+              <BsPersonFillAdd style={{ fontSize: '2em', color: iconColor }} />
+              :
+              <BsPersonFillUp style={{ fontSize: '2em', color: iconColor }} />
+          }
         </Flex>
         <Text fontSize='2em' textTransform={'uppercase'}>
           {isAddUser ? `Add User` : `Update User`}
