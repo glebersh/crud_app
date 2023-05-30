@@ -4,7 +4,6 @@ import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { connectToMongoDB } from "@/mongodb/helpers/connectToMongoDB";
 import Admins from "@/mongodb/models/admin.model";
-import { NextApiRequest } from "next";
 import { compare } from "bcryptjs";
 
 const GOOGLE_SECRET = process.env.NEXT_PUBLIC_GOOGLE_SECRET;
@@ -37,10 +36,11 @@ export const authOptions: NextAuthOptions = {
 
         const authResult: { _id: string, name: string, email: string, password: string, image: string | null } | null = await Admins.findOne({ email: logInEmail });
 
-        if (!authResult) throw new Error('asd')
+        if (!authResult) throw new Error('User not found');
 
         const checkedPassword = await compare(logInPassword, authResult.password);
-        if (!checkedPassword || authResult.email !== logInEmail) throw new Error('asd2__');
+        if (authResult.email !== logInEmail) throw new Error('Incorrect email');
+        if (!checkedPassword) throw new Error('Incorrect password');
 
         return {
           id: authResult._id,

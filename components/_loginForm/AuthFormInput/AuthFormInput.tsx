@@ -10,11 +10,12 @@ type AuthFormInputProps = {
   icon?: ReactNode,
   iconFocusPos?: number,
   onEnterDown?: (e: KeyboardEvent) => void,
-  iconHandler?: () => void
+  iconHandler?: () => void,
+  inputError: string | undefined
 };
 
 const AuthFormInput = (props: AuthFormInputProps) => {
-
+  const { changeHandler, type, id, name, label, icon, iconFocusPos, onEnterDown, iconHandler, inputError } = props;
   const ref = useRef<HTMLDivElement>(null);
 
   const inputFocusHandler = (e: FocusEvent<HTMLInputElement, Element>, iconPos: number) => {
@@ -35,16 +36,17 @@ const AuthFormInput = (props: AuthFormInputProps) => {
   return (
     <>
       <FormControl>
-        <FormLabel htmlFor={props.id}>{props.label}</FormLabel>
-        <Flex alignItems='center' justifyContent={'space-between'} border='2px solid #ddd'
+        <FormLabel htmlFor={id} color={inputError ? 'red' : 'inherit'}>{inputError ? inputError : label}</FormLabel>
+        <Flex alignItems='center' justifyContent={'space-between'} border={`2px solid ${inputError ? 'red !important' : '#ddd'}`}
           borderRadius='.35em'
           ref={ref} transition={'all .33s'}>
 
-          <Input type={props.type} id={props.id} name={props.name} className={isLight ? 'custom_input_autofill_default_light' : 'custom_input_autofill_default_dark'}
-            onChange={props.changeHandler}
-            onFocus={e => inputFocusHandler(e, props.iconFocusPos ? props.iconFocusPos : 0)}
-            onBlur={e => inputBlurHandler(e, props.iconFocusPos ? props.iconFocusPos : 0)}
-            onKeyDown={props.onEnterDown ? e => props.onEnterDown : () => null}
+          <Input type={type} id={id} name={name}
+            className={isLight ? 'custom_input_autofill_default_light' : 'custom_input_autofill_default_dark'}
+            onChange={changeHandler}
+            onFocus={e => inputFocusHandler(e, iconFocusPos ? iconFocusPos : 0)}
+            onBlur={e => inputBlurHandler(e, iconFocusPos ? iconFocusPos : 0)}
+            onKeyDown={onEnterDown ? e => onEnterDown : () => null}
             outline='none !important'
             w='80%'
             border='none'
@@ -52,10 +54,10 @@ const AuthFormInput = (props: AuthFormInputProps) => {
             backgroundColor='transparent'
           />
           {
-            props.icon ?
+            icon ?
               (
                 <Flex alignItems={'center'} m='0 1em 0 auto' gap='1em'>
-                  {props.icon}
+                  {icon}
                 </Flex>
               ) : null
           }

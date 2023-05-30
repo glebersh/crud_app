@@ -4,6 +4,7 @@ import formReducer from './slices/formSlice';
 import operationResultReducer from './slices/operationResultSlice';
 import filtersReducer from './slices/filtersSlice';
 import paginationReducer from './slices/paginationSlice';
+import authReducer from './slices/authSlice';
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     filtersReducer,
     paginationReducer,
     operationResultReducer,
+    authReducer
   }
 });
 

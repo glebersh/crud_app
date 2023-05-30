@@ -12,14 +12,17 @@ import { LinkStyleButtonStyles } from '@/styles/additionalStyles';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { useBackgroundColor } from '@/hooks/useBackgroundColor';
 import { BsMoonFill, BsSun } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 
 export default function Home() {
-  const session = useSession();
-  const router = useRouter();
+
   const [isRegistration, setFormType] = useState(false);
   const bgColor = useBackgroundColor();
 
+  const session = useSession();
+  const router = useRouter();
   useEffect(() => {
     if (session.status === 'authenticated') {
       router.push('/users');
@@ -28,6 +31,7 @@ export default function Home() {
 
   const { toggleColorMode, colorMode } = useColorMode();
   const isLight = colorMode === 'light';
+  const authResult = useSelector((state: RootState) => state.authReducer);
 
   return (
     <>
@@ -52,14 +56,13 @@ export default function Home() {
                 />
             }
           </Button>
-          <Box backgroundColor={bgColor} w='50%' p='2em' m='0 auto' borderRadius='.5em' zIndex={999}>
+          <Box backgroundColor={bgColor} w='50%' p='1em' m='0 auto' borderRadius='.5em' zIndex={999}>
             {
               isRegistration ?
                 <RegistrationForm successHandler={() => setFormType(false)} />
                 :
                 <LoginForm />
             }
-            <ProvidersBlock isRegistration={isRegistration} />
             <Flex alignItems='center' w='100%' gap='.5em' justifyContent='center'>
               {
                 !isRegistration ?
