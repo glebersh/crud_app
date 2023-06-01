@@ -11,7 +11,7 @@ import AddFormSectionHeader from "../AddFormSectionHeader/";
 import AddUserFormSelect from "../AddUserFormSelect/";
 import AddUserFormTextarea from "../AddUserFormTextarea/";
 import AddUserFormRadio from "../AddUserFormRadio";
-import { BsFileEarmarkPersonFill, BsInfoSquare, BsTelephoneFill, BsUiChecks } from "react-icons/bs";
+import { BsFileEarmarkPerson, BsFileEarmarkPersonFill, BsInfoSquare, BsTelephoneFill, BsUiChecks } from "react-icons/bs";
 import { AiOutlineContacts } from "react-icons/ai";
 import { GrContactInfo } from "react-icons/gr";
 
@@ -25,18 +25,22 @@ const AddUserForm = ({ submitHandler }: AddFormProps) => {
   const addFormik = useAddForm(formData, submitHandler);
 
   return (
-    <form onSubmit={addFormik.handleSubmit}>
-      <Flex direction='column' alignItems='center' {...DefaultWrapperStyles} p='2em 0' backgroundColor={bg}>
+    <form
+      // onSubmit={e => e.preventDefault()}
+      onSubmit={addFormik.handleSubmit}
+    >
+      <Flex direction='column' alignItems='center' {...DefaultWrapperStyles} p='1em 0' backgroundColor={bg}>
 
         <FormTitle />
 
         <Flex w='80%' direction='column' m='0 auto' gap='1em'>
           <AddFormSectionHeader
-            icon={<GrContactInfo />}
+            icon={<BsFileEarmarkPerson />}
             label="Personal Details" />
           <Flex>
             <Flex direction="column" w='42%' gap='1em'>
               <AddUserFormInput
+                inputError={addFormik.errors.first_name}
                 label='First name'
                 value={addFormik.values.first_name}
                 name="first_name"
@@ -44,6 +48,7 @@ const AddUserForm = ({ submitHandler }: AddFormProps) => {
                 changeHandler={addFormik.handleChange}
               />
               <AddUserFormInput
+                inputError={addFormik.errors.last_name}
                 label='Last name'
                 value={addFormik.values.last_name}
                 name="last_name"
@@ -82,13 +87,16 @@ const AddUserForm = ({ submitHandler }: AddFormProps) => {
           <Flex>
             <Box w='42%'>
               <AddUserFormInput
+                inputError={addFormik.errors.email}
                 label='Email' placeholder="e.g. johnwick@example.com"
                 value={addFormik.values.email}
                 name="email" id='email_input'
                 changeHandler={addFormik.handleChange} />
             </Box>
             <Flex direction="column" w='42%' ml='auto'>
-              <FormLabel>Phone</FormLabel>
+              <FormLabel
+                color={addFormik.errors.phone ? 'red' : 'inherit'}
+              >{addFormik.errors.phone ? addFormik.errors.phone : 'Phone'}</FormLabel>
               <Input type='tel'
                 focusBorderColor="accentOne"
                 value={addFormik.values.phone}
@@ -112,6 +120,7 @@ const AddUserForm = ({ submitHandler }: AddFormProps) => {
                 options={formSelectDeparmentOptions}
               />
               <AddUserFormInput
+                inputError={addFormik.errors.salary}
                 label='Salary'
                 value={addFormik.values.salary}
                 name="salary" id='salary_input'
@@ -119,6 +128,7 @@ const AddUserForm = ({ submitHandler }: AddFormProps) => {
             </Flex>
             <Flex direction="column" w='42%' ml='auto'>
               <AddUserFormInput
+                inputError={addFormik.errors.desiredPosition}
                 label='Desired position'
                 value={addFormik.values.desiredPosition}
                 name="desiredPosition"

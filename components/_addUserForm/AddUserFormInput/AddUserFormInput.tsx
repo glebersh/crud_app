@@ -8,15 +8,20 @@ type AddUserFormInputProps = {
   name: string,
   value: string | number
   changeHandler: (e: ChangeEvent) => void,
-  placeholder?: string
+  placeholder?: string,
+  inputError: string | undefined
 };
 
 const AddUserFormInput = (props: AddUserFormInputProps) => {
-  const { id, name, changeHandler, value, label, placeholder } = props;
+  const { id, name, changeHandler, value, label, placeholder, inputError } = props;
 
   return (
     <Box>
-      <FormLabel htmlFor={id}>{label}</FormLabel>
+      <FormLabel htmlFor={id}
+        color={inputError ? 'red' : 'inherit'}
+      >
+        {inputError ? inputError : label}
+      </FormLabel>
       <Input
         _placeholder={{ color: '#aaa' }}
         placeholder={placeholder}
@@ -28,7 +33,7 @@ const AddUserFormInput = (props: AddUserFormInputProps) => {
         name={name}
         onChange={e => changeHandler(e)}
         {...AddUserFormInputDefaultStyles}
-
+        borderColor={inputError ? 'red' : '#ddd'}
       />
     </Box>
   )

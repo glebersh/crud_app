@@ -1,9 +1,9 @@
+import { emailRegExp } from '@/consts';
 import { useAppDispatch } from '@/store/hooks/useAppDispatch';
 import { setAuthResult } from '@/store/slices/authSlice';
 import { useFormik } from 'formik';
 import { SignInResponse, signIn } from 'next-auth/react';
 
-const emailRegExp = new RegExp('!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i');
 
 export const useSignIn = () => {
   const dispatch = useAppDispatch();

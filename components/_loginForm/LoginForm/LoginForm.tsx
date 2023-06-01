@@ -7,12 +7,13 @@ import { BsEyeFill, BsFillEyeSlashFill, BsFingerprint, BsMailbox2, BsPersonWorks
 import ProvidersBlock from "../ProvidersBlock";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
+import { useSession } from "next-auth/react";
 
 const LoginForm = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const formikLogin = useSignIn();
   const authResult = useSelector((state: RootState) => state.authReducer);
-
+  const session = useSession();
   return (
     <>
       <form onSubmit={formikLogin.handleSubmit}>
@@ -68,6 +69,7 @@ const LoginForm = () => {
             formikLogin.isSubmitting ?
               <Spinner />
               :
+              session.status !== 'authenticated' &&
               <>
                 <Input type='submit' {...LoginButtonStyles}
                   value='Sign In' />

@@ -8,7 +8,7 @@ type FormSectionHeaderProps = {
 
 const AddFormSectionHeader = ({ label, icon }: FormSectionHeaderProps) => {
     return (
-        <Flex gap='1em' fontSize='1.25em' borderBottom='1px solid #aaaaaa50' pb='.25em'>
+        <Flex gap='1em' fontSize='1.25em' borderBottom='1px solid #aaaaaa50' pb='.25em' alignItems='center'>
             {icon}
             <Text textTransform={'uppercase'} fontWeight='500'>{label}</Text>
         </Flex>
