@@ -1,21 +1,19 @@
 import { MongoDBUserModel } from "@/types";
-import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { useBackgroundColor } from "@/hooks/useBackgroundColor";
 import UserInfoText from "../UserInfoTextItem/";
 import { toFirstLetterCapital } from "@/lib/capitalFirstLetter";
 import { AiOutlineContacts, AiOutlineMail } from "react-icons/ai";
-import { GrContactInfo, GrScorecard } from "react-icons/gr";
 import { BsDot, BsFileEarmarkPerson, BsFillTelephoneFill, BsInfoSquare, BsShare, BsUiChecks } from "react-icons/bs";
 import UserLinksBlock from "../UserLinksBlock";
-import { ButtonDefaultStyles } from "@/styles/additionalStyles";
 
 const UserInfoBlock = ({ user }: { user: MongoDBUserModel }) => {
   const { _id, name, email, salary, birth_date, status, gender, avatar_img_URL, phone, department, desiredPosition, about } = user;
   const bgColor = useBackgroundColor();
 
   return (
-    <Flex backgroundColor={bgColor} m='2em auto' p='2em' w='80%' borderRadius='.35em' gap='3em'>
-      <Image src={avatar_img_URL} w='220px' h='220px' boxShadow='rgba(99, 99, 99, .4) 0px 2px 8px 0px' borderRadius='50%' />
+    <Flex backgroundColor={bgColor} m='2em auto' p='2em' w='80%' borderRadius='15px' gap='3em'>
+      <Image src={avatar_img_URL} w='220px' h='220px' borderRadius='50%' />
       <Flex gap='1em' direction='column' flex='1'>
 
         <Flex direction='column' borderRadius='.35em' gap='1em'>
@@ -37,13 +35,13 @@ const UserInfoBlock = ({ user }: { user: MongoDBUserModel }) => {
           </Flex>
           <Flex gap='15em'>
             <Flex alignItems='center' gap='1em'>
-              <Flex backgroundColor='#EEEEEE70' borderRadius='50%' w='40px' h='40px' justifyContent='center' alignItems='center'>
+              <Flex backgroundColor='#EEEEEE50' borderRadius='50%' w='40px' h='40px' justifyContent='center' alignItems='center'>
                 <AiOutlineMail />
               </Flex>
               <UserInfoText label='Email' text={email} />
             </Flex>
             <Flex alignItems='center' gap='1em'>
-              <Flex backgroundColor='#EEEEEE70' borderRadius='50%' w='40px' h='40px' justifyContent='center' alignItems='center'>
+              <Flex backgroundColor='#EEEEEE50' borderRadius='50%' w='40px' h='40px' justifyContent='center' alignItems='center'>
                 <BsFillTelephoneFill />
               </Flex>
               <UserInfoText label='Phone number' text={phone} />
@@ -75,10 +73,10 @@ const UserInfoBlock = ({ user }: { user: MongoDBUserModel }) => {
           <UserInfoText label='About' text={about} />
         </Flex>
       </Flex>
-      <Flex ml='auto' direction={'column'} gap='2em' alignItems='flex-end'>
-        <BsShare />
+      <Flex ml='auto' direction='column' gap='2em' alignItems='flex-end'>
+        <BsShare style={{ marginRight: '1em' }} />
         <Box>
-          <Text color='#888' mb={'.5em'}>More</Text>
+          <Text color='#888' mb='.5em'>More</Text>
           <UserLinksBlock />
         </Box>
       </Flex>

@@ -1,24 +1,25 @@
-import { extractPath } from "@/lib/extractPath";
 import { ColorModeButtonStylesDark, ColorModeButtonStylesLight } from "@/styles/additionalStyles";
-import { Box, Flex, Button, useColorMode, Tooltip, Text } from "@chakra-ui/react";
+import { Flex, Button, useColorMode, Tooltip, Text, Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import NavigationLink from "../NavigationLink";
 import AdminInfo from "../AdminInfo";
-import { BsBell, BsEnvelopeAt, BsMoonFill, BsSun } from "react-icons/bs";
+import { BsBell, BsChevronLeft, BsEnvelopeAt, BsMoonFill, BsSun } from "react-icons/bs";
 
 const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const router = useRouter();
-  const navigation = extractPath(router);
-
   const isLight = colorMode === 'light';
 
   return (
     <Flex backgroundColor={isLight ? 'white' : '#1a1a1a'} p='1.5em' alignItems={'center'} >
       <Flex w='80%' m='0 auto' direction='column' flex='1' p=' 0 2em'>
         <Flex justifyContent='flex-end' alignItems='center'>
-          <Text fontSize='2.25em' m='.35em auto 0 0'>Dashboard</Text>
-
+          <Flex mr='auto' alignItems='center'>
+            <Tooltip label='Back to previous page'>
+              <Button onClick={() => router.back()} _hover={{ color: 'accentOne' }}
+                fontSize='1.5em' variant='link'><BsChevronLeft /></Button>
+            </Tooltip>
+            <Text fontSize='2.25em' ml='1em'>Dashboard</Text>
+          </Flex>
           <AdminInfo />
 
           <Flex gap='.75em'>
@@ -46,9 +47,6 @@ const Header = () => {
             </Button>
           </Flex>
         </Flex>
-        <Box>
-          <NavigationLink paths={navigation} />
-        </Box>
       </Flex>
     </Flex>
   )

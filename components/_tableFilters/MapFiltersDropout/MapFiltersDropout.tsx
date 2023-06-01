@@ -54,8 +54,7 @@ const FiltersDropoutMenu = () => {
   return (
     <>
       <Flex borderRadius='15px' direction='column' id='filters_dropout_menu'
-        backgroundColor={bgColor}
-        boxShadow='rgba(99, 99, 99, 0.2) 0px 2px 8px 0px'>
+        backgroundColor={bgColor}>
 
         <Flex direction='column' borderBottom='1px solid #aaa' p='1em'>
           <CheckboxWithLabel changeHandler={() => disableHandler('status')} label='Status' isChecked={isDisabled.status} />

@@ -3,7 +3,6 @@ import AddUserFormInput from "./_addUserForm/AddUserFormInput";
 import FormTitle from "./_addUserForm/FormTitle";
 import Header from "./_utils/Header";
 import ModalWindow from "./_utils/ModalWindow";
-import NavigationLink from "./_utils/NavigationLink";
 import PageAnimationWrapper from "./_utils/PageAnimationWrapper";
 import PaginationBlock from "./_userDataTable/PaginationBlock";
 import Searchbar from "../UI/CustomSearchbar";
@@ -20,7 +19,6 @@ export {
   FormTitle,
   Header,
   ModalWindow,
-  NavigationLink,
   PageAnimationWrapper,
   PaginationBlock,
   Searchbar,

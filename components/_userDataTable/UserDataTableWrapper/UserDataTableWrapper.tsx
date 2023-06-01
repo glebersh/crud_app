@@ -24,8 +24,7 @@ const UserDataTableWrapper = () => {
         justifyContent='space-evenly'
         borderRadius='15px'
         p='1em 0 2.5em 0'
-        backgroundColor={bgColor}
-        boxShadow='rgba(99, 99, 99, 0.2) 0px 2px 8px 0px'>
+        backgroundColor={bgColor}>
         <TableFiltersWrapper />
       </Flex>
       <Flex direction='column' alignItems='center'>

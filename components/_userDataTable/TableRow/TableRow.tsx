@@ -2,7 +2,7 @@ import Link from "next/link";
 import { MongoDBUserModel } from "@/types";
 import { useDeleteUser } from "@/hooks/useDeleteUser";
 import { RowDefaultStyles, UserRowIconsStyles } from "@/styles/additionalStyles";
-import { Text, Tooltip } from "@chakra-ui/react";
+import { Text, Tooltip, useColorModeValue } from "@chakra-ui/react";
 import { AnimatePresence, motion } from 'framer-motion';
 import { useToggleFormUpdate } from "@/hooks";
 import { BsPencilSquare, BsPersonDashFill } from "react-icons/bs";
@@ -11,10 +11,11 @@ const TableRow = ({ user, haveBorder }: { user: MongoDBUserModel, haveBorder?: b
   const { _id, name, email, salary, birth_date, status, gender } = user;
 
   const deleteUser = useDeleteUser();
-  const updateUserHandler = useToggleFormUpdate(user, _id)
+  const updateUserHandler = useToggleFormUpdate(user, _id);
+  const rowBorderColor = useColorModeValue('#CCC', '#555');
 
-  const alertAnimations = {
-    key: '21313sdsd',
+  const rowAnimations = {
+    key: 'rowAnimations',
     initial: { opacity: 0, height: ' 0px' },
     animate: { opacity: 1, height: '80px' },
     exit: {
@@ -28,9 +29,9 @@ const TableRow = ({ user, haveBorder }: { user: MongoDBUserModel, haveBorder?: b
 
   return (
     <AnimatePresence>
-      <motion.tr {...alertAnimations}
+      <motion.tr {...rowAnimations}
         {...RowDefaultStyles}
-        style={{ borderBottom: `${haveBorder ? '1px solid #EEE' : '1px solid transparent'}` }}>
+        style={{ borderBottom: `${haveBorder ? `1px solid ${rowBorderColor}` : '1px solid transparent'}` }}>
         <td>
           <img src={user.avatar_img_URL} alt={`${user.name}_profile_picture`} width={50} height={50} />
         </td>

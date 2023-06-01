@@ -55,7 +55,7 @@ html[data-theme='dark'] {
 
 .row_user_actions_icon {
   transition: all .33s ease-in-out;
-  color: #444
+  color: #888
 }
 
 .row_user_actions_icon:hover {
